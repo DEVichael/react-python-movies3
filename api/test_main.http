@@ -1,0 +1,24 @@
+POST http://127.0.0.1:8000/movies
+Content-Type: application/json
+
+{
+  "title": "title1",
+  "year": 1923,
+  "director": "director1",
+  "description": ""
+}
+
+###
+
+GET http://127.0.0.1:8000/movies
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/movies/7
+Accept: application/json
+
+###
+
+DELETE http://127.0.0.1:8000/movies/5
+Accept: application/json
