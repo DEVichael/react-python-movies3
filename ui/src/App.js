@@ -6,13 +6,15 @@ import MoviesList from "./MoviesList";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function App() {
     const [movies, setMovies] = useState([]);
     const [addingMovie, setAddingMovie] = useState(false);
 
     useEffect(() => {
         const fetchMovies = async () => {
-            const response = await fetch(`http://localhost:8000/movies`);
+            const response = await fetch(`${API_URL}/movies`);
             if (response.ok) {
                 const movies = await response.json();
                 setMovies(movies);
@@ -23,7 +25,7 @@ function App() {
     }, [movies.length]);
 
     async function handleAddMovie(movie) {
-        const response = await fetch('http://localhost:8000/movies', {
+        const response = await fetch(`${API_URL}/movies`, {
             method: 'POST',
             body: JSON.stringify(movie),
             headers: { 'Content-Type': 'application/json' }
@@ -40,7 +42,7 @@ function App() {
         const ok = window.confirm(`Czy na pewno chcesz usunąć film "${movie.title}"?`);
         if (!ok) return;
 
-        const response = await fetch(`http://localhost:8000/movies/${movie.id}`, {
+        const response = await fetch(`${API_URL}/movies/${movie.id}`, {
             method: 'DELETE',
         });
 
